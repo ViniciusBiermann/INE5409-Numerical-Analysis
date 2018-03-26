@@ -39,9 +39,9 @@ A(n,n) = 1.00;
 b(n,1) = 3.00;
 
 %%%%
-
-x = fGauss(A,b);
+fprintf("\n-----------------------------------------------\n");
 fprintf("\n - Método Eliminação Gaussiana com Pivotação Parcial - \n");
+x = fGauss(A,b);
 fprintf("\n - x(1) = %f e x(2) = %f\n", x(1), x(n));
 rmax = fresiduo(A, b, x);
 fprintf("\n - resíduo máximo = %f\n", rmax);
@@ -73,8 +73,8 @@ r(n) = 1.00;
 d(n) = 0.00;
 
 %%%%
-y = fGaussTRD(n, t, r, d, b);
 fprintf("\n - Método Otimizado Matriz Tridiagonal - \n");
+y = fGaussTRD(n, t, r, d, b);
 fprintf("\n - x(1) = %f e x(2) = %f\n", y(1), y(n));
 rmax2 = fresiduoTRD(n, t, r, d, b, y);
 fprintf("\n - resíduo máximo = %f\n", rmax2);
