@@ -49,7 +49,7 @@ fprintf("\n - resíduo máximo = %f\n", rmax);
 fprintf("\n-----------------------------------------------\n");
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
+% Using optimized method for tridiagonal matrix
 %%%%
 
 t(1) = 0.00;
@@ -82,10 +82,16 @@ fprintf("\n - resíduo máximo = %f\n", rmax2);
 fprintf("\n-----------------------------------------------\n");
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
+% Using iteractive method of Gauss-Seidel
 %%%%
 
 fprintf("\n - Método Iterativo de Gauss-Seidel - \n");
+
+fprintf(['\n - O sistema tem convergência garantida, pois possui uma diagonal\n', ... 
+'dominante, ou seja, o elemento da diagonal principal é maior ou igual\n', ...
+'à soma de seus elementos vizinhos e, em pelo menos uma linha, esse\n', ...
+'elemento é maior que a soma dos seus vizinhos.\n']);
+
 z = fGaussSeidel(n, A, b);
 fprintf("\n - x(1) = %f e x(2) = %f\n", z(1), z(n));
 fprintf("\n-----------------------------------------------\n");
