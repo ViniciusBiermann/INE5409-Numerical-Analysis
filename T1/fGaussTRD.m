@@ -1,4 +1,4 @@
-function x = fGaussTRD(n, t, r, d, b)
+function [x, flt_op] = fGaussTRD(n, t, r, d, b)
     flt_op = 0;
     for i = 2 : n
         Aux = t(i)/r(i-1);
@@ -15,5 +15,4 @@ function x = fGaussTRD(n, t, r, d, b)
         flt_op = flt_op + 3;
     end
     
-    fprintf("\n - Número de operações em ponto flutuante: %i\n", flt_op);
 end

@@ -1,4 +1,4 @@
-function x = fGauss(A,b)
+function [x, flt_op] = fGauss(A,b)
     n = size(A,1);
     A = [A b;];
     
@@ -46,5 +46,4 @@ function x = fGauss(A,b)
         flt_op = flt_op + 2;
     end
     
-    fprintf("\n - Número de operações em ponto flutuante: %i\n", flt_op);
 end
