@@ -12,7 +12,6 @@ format long
 %}
 
 n = 50;
-flt_op = 0;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Using direct method of Gaussian Elimination with partial pivoting
@@ -43,7 +42,7 @@ b(n,1) = 3.00;
 fprintf("\n-----------------------------------------------\n");
 fprintf("\n - Método Eliminação Gaussiana com Pivotação Parcial - \n");
 [x, flt_op] = fGauss(A,b);
-fprintf("\n - x(1) = %f e x(2) = %f\n", x(1), x(n));
+fprintf("\n - x(1) = %f e x(n) = %f\n", x(1), x(n));
 rmax = fresiduo(A, b, x);
 fprintf("\n - resíduo máximo = %f\n", rmax);
 fprintf("\n - Número de operações em ponto flutuante: %i\n", flt_op);
@@ -76,9 +75,9 @@ d(n) = 0.00;
 
 %%%%
 fprintf("\n - Método Otimizado Matriz Tridiagonal - \n");
-flt_op = 0;
+
 [y, flt_op] = fGaussTRD(n, t, r, d, b);
-fprintf("\n - x(1) = %f e x(2) = %f\n", y(1), y(n));
+fprintf("\n - x(1) = %f e x(n) = %f\n", y(1), y(n));
 rmax2 = fresiduoTRD(n, t, r, d, b, y);
 fprintf("\n - resíduo máximo = %f\n", rmax2);
 fprintf("\n - Número de operações em ponto flutuante: %i\n", flt_op);
@@ -90,15 +89,32 @@ fprintf("\n-----------------------------------------------\n");
 %%%%
 
 fprintf("\n - Método Iterativo de Gauss-Seidel - \n");
-flt_op = 0;
 
 fprintf(['\n - O sistema tem convergência garantida, pois possui uma diagonal\n', ... 
 'dominante, ou seja, o elemento da diagonal principal é maior ou igual\n', ...
 'à soma de seus elementos vizinhos e, em pelo menos uma linha, esse\n', ...
 'elemento é maior que a soma dos seus vizinhos.\n']);
 
-[z, flt_op] = fGaussSeidel(n, A, b);
-fprintf("\n - x(1) = %f e x(2) = %f\n", z(1), z(n));
+fprintf(['\nForam testados os seguintes fatores de relaxação:\n', ...
+'lambda = 1     ->      k = 10\n', ...
+'lambda = 0.8   ->      k = 15\n', ...
+'lambda = 0.9   ->      k = 12\n', ...
+'lambda = 1.1   ->      k = 9\n', ...
+'lambda = 1.2   ->      k = 11\n', ...
+'Como lambda = 1.1 gerou o menor número de iterações, ele foi o escolhido.\n']);
+
+fprintf("\n- Valores com tolerância 1e-4 -\n");
+tolerancia = 1e-4;
+[z, flt_op] = fGaussSeidel(n, A, b, tolerancia);
+fprintf("\n - x(1) = %f e x(n) = %f\n", z(1), z(n));
 fprintf("\n - Número de operações em ponto flutuante: %i\n", flt_op);
+
+fprintf("\n- Valores com tolerância (1e-4)^2 -\n");
+[ze, flt_op] = fGaussSeidel(n, A, b, tolerancia^2);
+fprintf("\n - x(1) = %f e x(n) = %f\n", ze(1), ze(n));
+fprintf("\n - Número de operações em ponto flutuante: %i\n", flt_op);
+
+Errotruncamento=max(abs(z-ze));
+fprintf("\n- Erro de truncamento: %.20f\n", Errotruncamento);
 
 fprintf("\n-----------------------------------------------\n");
