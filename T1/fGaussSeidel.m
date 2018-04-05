@@ -6,8 +6,9 @@ function [x, flt_op] = fGaussSeidel(n, A, b, tolerancia)
     
     crit = 1;
     k = 0;
-    lambda = 1.1;
+    lambda = 1.06;
     lambda_aux = 1 - lambda;
+    flt_op = flt_op + 1;
     
     while (crit > tolerancia && k < 100)
         aux = x;
